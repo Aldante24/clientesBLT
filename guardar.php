@@ -10,6 +10,20 @@ $opcion = $_POST["opcion"];
 $informacion = [];
 
 switch ($opcion) {
+  case 'registrar':
+  if( $cliente != "" &amp;&amp; $direccion != "" &amp;&amp; $zona != "" ){
+      $existe = existe_usuario($dni, $conexion);
+      if ($existe>0) {
+        $informacion["respuesta"]="EXISTE";
+        echo json_encode($informacion);
+      }else {
+        registrar($nombre, $apellidos, $dni, $conexion);
+      }
+    }else{
+      $informacion["respuesta"] = "VACIO";
+      echo json_encode($informacion);
+    }
+    break;
   case 'modificar':
     modificar($cliente, $direccion, $zona, $idcliente, $conexion);
     break;
@@ -17,7 +31,25 @@ switch ($opcion) {
   case 'eliminar':
     eliminar($idcliente, $conexion);
     break;
+    default:
+      $informacion["respuesta"]="OPCION_VACIA";
+      echo json_encode ($informacion);
+      break;
 }
+
+function existe_usuario($dni, $conexion){
+		$query = "SELECT idcliente FROM clientes WHERE cliente = '$cliente';";
+		$resultado = mysqli_query($conexion, $query);
+		$existe_usuario = mysqli_num_rows( $resultado );
+		return $existe_usuario;
+	}
+
+	function registrar($nombre, $apellidos, $dni, $conexion){
+		$query = "INSERT INTO clientes VALUES(0, '$cliente', '$direccion', '$zona', 1);";
+		$resultado = mysqli_query($conexion, $query);
+		verificar_resultado($resultado);
+		cerrar($conexion);
+	}
 
 function modificar($cliente, $direccion, $zona, $idcliente, $conexion){
 $query= "UPDATE clientes SET cliente='$cliente',
