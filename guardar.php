@@ -30,7 +30,7 @@ cerrar( $conexion );
 }
 
 function eliminar($idcliente, $conexion){
-$query = "DELETE FROM clientes WHERE idcliente = $idcliente";
+$query = "UPDATE clientes SET estado = 0 WHERE idcliente = $idcliente";
 $resultado = mysqli_query($conexion, $query);
 verificar_resultado( $resultado );
 cerrar( $conexion );

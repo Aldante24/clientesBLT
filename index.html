@@ -97,7 +97,8 @@
 		</form>
 	</div>
 
-	<script src="js/jquery-1.12.3.js"></script>
+	<!-- <script src="js/jquery-1.12.3.js"></script> -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.js"></script>
@@ -150,10 +151,11 @@
 					url: "guardar.php",
 					data: {"idcliente": idcliente, "opcion": opcion}
 				}).done( function( info ){
-					var json_info = JSON.parse( info );
-					mostrar_mensaje( json_info );
-					limpiar_datos();
-					listar();
+				console.log( info );
+				var json_info = JSON.parse( info );
+				mostrar_mensaje( json_info );
+				limpiar_datos();
+				listar();
 				});
 			});
 		}
