@@ -11,18 +11,7 @@ $informacion = [];
 
 switch ($opcion) {
   case 'registrar':
-  if( $cliente != "" &amp;&amp; $direccion != "" &amp;&amp; $zona != "" ){
-      $existe = existe_usuario($dni, $conexion);
-      if ($existe>0) {
-        $informacion["respuesta"]="EXISTE";
-        echo json_encode($informacion);
-      }else {
-        registrar($nombre, $apellidos, $dni, $conexion);
-      }
-    }else{
-      $informacion["respuesta"] = "VACIO";
-      echo json_encode($informacion);
-    }
+    registrar($cliente, $direccion, $zona, $conexion);
     break;
   case 'modificar':
     modificar($cliente, $direccion, $zona, $idcliente, $conexion);
@@ -44,7 +33,7 @@ function existe_usuario($dni, $conexion){
 		return $existe_usuario;
 	}
 
-	function registrar($nombre, $apellidos, $dni, $conexion){
+	function registrar($cliente, $direccion, $zona, $conexion){
 		$query = "INSERT INTO clientes VALUES(0, '$cliente', '$direccion', '$zona', 1);";
 		$resultado = mysqli_query($conexion, $query);
 		verificar_resultado($resultado);
