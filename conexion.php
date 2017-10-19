@@ -1,6 +1,6 @@
 <?php
 	$server = "localhost";
-	$user = "root";
+	$user = "aldo";
 	$password = "admin";//poner tu propia contraseña, si tienes una.
 	$bd = "siatBlt";
 
