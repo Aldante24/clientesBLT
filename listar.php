@@ -2,7 +2,7 @@
 
 	include ("conexion.php");
 
-	$query = "SELECT * FROM clientes;";
+	$query = "SELECT * FROM clientes WHERE estado = 1 ORDER BY idcliente desc;";
 	$resultado = mysqli_query($conexion, $query);
 
 	if (!$resultado) {
